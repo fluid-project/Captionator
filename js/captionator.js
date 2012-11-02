@@ -260,7 +260,8 @@
 					this.loadTrack = function(source) {
 					    var currentTrackElement = this;
 					    if (source.substr(0, 5) == "data:") {
-					        currentTrackElement.processCaptions(readDataUrl(source));
+					        var caps = readDataUrl(source)
+					        currentTrackElement.processCaptions(caps);
 					    } else {
 						    var ajaxObject = new XMLHttpRequest();
 						    this.src = source;
