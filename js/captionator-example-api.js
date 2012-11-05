@@ -5,7 +5,7 @@ var generateTranscript = function() {
 };
 
 var generateMediaControls = function(videoElement) {
-	if (!(videoElement instanceof HTMLVideoElement) || !videoElement.tracks) return null;
+	if (!(videoElement instanceof HTMLVideoElement) || !videoElement.textTracks) return null;
 	
 	var tableFragment = document.createDocumentFragment();
 	// Set up table structure
@@ -62,7 +62,7 @@ var generateMediaControls = function(videoElement) {
 						toggleTD.appendChild(trackToggle);
 						
 						trackToggle.addEventListener("change",function(eventData) {
-							currentTrack.mode = [0,2][Number(this.checked)];
+							currentTrack.mode = [currentTrack.DISABLED,currentTrack.SHOWING][Number(this.checked)];
 							modeTD.innerHTML = ["Not Showing","Hidden","Showing"][currentTrack.mode];
 						},false);
 						
@@ -82,7 +82,7 @@ var generateMediaControls = function(videoElement) {
 	// Now make them go!
 	
 	createRowHeader("Text Tracks");
-	createRowsForTrackList(videoElement.tracks);
+	createRowsForTrackList(videoElement.textTracks);
 	createRowHeader("Media Tracks");
 	createRowsForTrackList(videoElement.mediaTracks);
 	
